@@ -1,12 +1,12 @@
 import typer
 from pathlib import Path
-from framework.core.generator import generate_project
-from framework.core.context import ProjectContext
+from pynet.core.generator import generate_project
+from pynet.core.context import ProjectContext
 
 app = typer.Typer()
 
 @app.command()
-def create(
+def create_app(
     project_name: str,
     template: str = typer.Option("basic", help="Template base"),
     path: str = typer.Option(".", help="Ruta destino"),
@@ -20,7 +20,7 @@ def create(
     context = ProjectContext(
         name=project_name,
         template=template,
-        paht=Path(path),
+        path=Path(path),
         db=db,
         features={
             "scripts": with_scripts,

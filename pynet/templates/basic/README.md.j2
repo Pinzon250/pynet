@@ -1,0 +1,26 @@
+# {{ project_name }}
+
+Proyecto generado con **pynet**
+
+## Ejecucion
+```bash
+python -m app.main
+
+---
+
+## 7. Implementación de `create_structure`
+
+```python
+def create_structure(ctx):
+    base_dirs = [
+        ctx.project_path / "app",
+        ctx.project_path / "app" / "config",
+        ctx.project_path / "app" / "db",
+        ctx.project_path / "app" / "services",
+    ]
+
+    if ctx.features.get("tests"):
+        base_dirs.append(ctx.project_path / "tests")
+
+    for directory in base_dirs:
+        ensure_dir(directory, ctx.dry_run)

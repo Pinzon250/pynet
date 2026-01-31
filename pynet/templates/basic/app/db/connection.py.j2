@@ -1,0 +1,5 @@
+from framework.db.connection import get_connection
+from app.config.settings import settings
+
+def get_db():
+    return get_connection(settings["database"])
