@@ -1,0 +1,7 @@
+# Requirements para desarrollo, usar pyproject para importar dependencias
+# pip install -e <>
+typer
+jinja2
+python-dotenv
+PyYAML
+rich
