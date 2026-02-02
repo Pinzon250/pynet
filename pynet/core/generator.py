@@ -97,8 +97,7 @@ def get_template_path(template_name: str) -> Path:
 def build_render_context(context: ProjectContext) -> dict:
     
     base = build_global_context(
-        project_name=context.name,
-        author=context.author
+        project_name=context.name
     )
     
     base.update({

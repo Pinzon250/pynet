@@ -6,7 +6,6 @@ from typing import Dict
 @dataclass
 class ProjectContext:
     name: str
-    author: str | None
     template: str
     path: Path
     db: str
