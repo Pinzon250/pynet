@@ -1,7 +1,7 @@
 # Virtual environments
-.\venv
-\venv
-\env
+.venv/
+venv/
+env/
 
 # VSC
 \.vscode 
@@ -13,3 +13,18 @@ build/
 dist/
 wheels/
 *.egg-info
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+
+#Environments variables
+*.env
+
+#Logs
+*.log
+
+# IDEs
+.idea/
+.vscode/

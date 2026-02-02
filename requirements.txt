@@ -1,7 +1,8 @@
-# Requirements para desarrollo, usar pyproject para importar dependencias
-# pip install -e <>
+# Requirements para desarrollo, usar pyproject en el entorno real
+# pip install -e .
 typer
 jinja2
 python-dotenv
 PyYAML
 rich
+pyodbc

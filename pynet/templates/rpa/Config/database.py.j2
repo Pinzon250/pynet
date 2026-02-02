@@ -1,0 +1,6 @@
+from pynet.libs.database import get_database
+
+db = get_database("sqlserver", config)
+db.connect()
+rows = db.fetch_all("SELECT * FROM users WHERE active = 1")
+db.close()

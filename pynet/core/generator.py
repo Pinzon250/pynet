@@ -1,6 +1,7 @@
 from pathlib import Path
 from tempfile import template
 from pynet.core.context import ProjectContext
+from pynet.core.globals import build_global_context
 from pynet.utils.files import ensure_dir, write_file
 from jinja2 import Environment, FileSystemLoader
 import re
@@ -22,6 +23,9 @@ def generate_project(context: ProjectContext):
     )
 
 def validate_context(context: ProjectContext):
+    """
+    Valida los parametros del contexto del proyecto
+    """
     if not context.name.isidentifier():
         raise ValueError(
             "Nombre de proyecto invalido"
@@ -36,9 +40,11 @@ def validate_context(context: ProjectContext):
         )
     
 def create_structure(context: ProjectContext):
+    """
+    Crea la estructura del proyecto
+    """
     dirs = [
-        context.project_path / "app",
-        context.project_path / "app" / "services"
+        context.project_path
     ]
 
     if context.features.get("scripts"):
@@ -89,9 +95,16 @@ def get_template_path(template_name: str) -> Path:
     return base / template_name
 
 def build_render_context(context: ProjectContext) -> dict:
-    return {
-        "project_name": context.name,
+    
+    base = build_global_context(
+        project_name=context.name,
+        author=context.author
+    )
+    
+    base.update({
         "db_driver": context.db,
         "features": context.features
-    }
+    })
+    
+    return base
     

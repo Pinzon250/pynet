@@ -6,6 +6,7 @@ from typing import Dict
 @dataclass
 class ProjectContext:
     name: str
+    author: str | None
     template: str
     path: Path
     db: str
@@ -15,4 +16,4 @@ class ProjectContext:
 
     @property
     def project_path(self) -> Path:
-        return self.path / self.name
+        return self.path / self.name    

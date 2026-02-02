@@ -1,0 +1,43 @@
+# ===============================
+# HUXX: Nombre de la Historia de Usuario
+# Autor: Nombre del Autor
+# Descripcion: Descripcion de la HU 
+# Ultima modificacion: Fecha de la ultima modificacion
+# ===============================
+
+def EjecutarHUXX():
+    """
+    Docstring for HU01_Prueba
+    """
+    # =========================
+    # CONFIGURACION DEL PROCESO
+    # =========================
+    task_name = "HUXX_NombreHU"
+
+    try:
+        # === Inicio HUXX ===
+        control_hu(task_name, 0)
+        # GestionTicketInsumo(estado, id, maquina, observaciones)
+        # WriteLog(mensaje="", estado="INFO", task_name=task_name)
+        
+        # ============================= Inicio acciones =============================
+
+        # ============================= Finalizacion HU =============================
+
+        Estado = 100
+        control_hu(task_name, Estado)
+        return Estado
+    
+    except Exception as e:
+        print(f"Error en ejecucion: ({e}) ")
+        # WriteLog()
+        # GestionTicketInsumo(id, observaciones, estado, maquina)
+        control_hu(task_name, 99)
+        # Estado = 99
+        # return Estado
+        raise
+
+    finally:
+        # WriteLog()
+        log = "Finalizacion HU"
+        print(log)
