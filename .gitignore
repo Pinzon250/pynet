@@ -3,8 +3,6 @@
 venv/
 env/
 
-# VSC
-\.vscode 
 
 # Python-generated files
 __pycache__/

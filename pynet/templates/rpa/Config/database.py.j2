@@ -1,6 +1,7 @@
-from pynet.libs.database import get_database
+from pynet.libs.db import get_database
+from demo.Config.settings import DB_CONFIG
 
-db = get_database("sqlserver", config)
+db = get_database("sqlserver", DB_CONFIG)
 db.connect()
 rows = db.fetch_all("SELECT * FROM users WHERE active = 1")
 db.close()

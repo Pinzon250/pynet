@@ -1,4 +1,7 @@
-from pynet.cli.app import app
+from pynet.cli import app
+from pynet.core.templates import list_templates
 
 if __name__ == "__main__":
-    print(app)
+    base = list_templates()
+    
+    print(base)

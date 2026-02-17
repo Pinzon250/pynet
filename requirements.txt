@@ -6,3 +6,4 @@ python-dotenv
 PyYAML
 rich
 pyodbc
+inquirerpy
