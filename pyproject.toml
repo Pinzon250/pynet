@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pynet"
+version = "0.1.0"
+description = "Framework CLI y SDK para proyectos Python (especialmente RPA) en NetApplications."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "NetApplications" }
+]
+license = { text = "Proprietary" }
+keywords = ["rpa", "cli", "scaffolding", "automation", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+# Dependencias mínimas: solo lo necesario para el CLI base.
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.7",
+    "PyYAML>=6.0",
+    "keyring>=24.0",          # almacén local seguro de credenciales (SDK)
+]
+
+# ── Extras opcionales ──
+# Cada extra agrupa las dependencias de un módulo del SDK o capacidad.
+# El dev instala solo lo que necesita.
+[project.optional-dependencies]
+# Plantillas Jinja2 (para `pynet create` y la lógica del generator)
+templates = ["jinja2>=3.1"]
+
+# Backend Azure Key Vault (lo usa tanto el CLI como el SDK)
+azure = [
+    "azure-identity>=1.15",
+    "azure-keyvault-secrets>=4.7",
+]
+
+# SDK: bases de datos
+database = [
+    "pyodbc>=5.0",
+    "psycopg2-binary>=2.9",
+    "mysql-connector-python>=8.0",
+]
+
+# SDK: SAP (solo Windows)
+sap = ["pywin32>=306; sys_platform == 'win32'"]
+
+# SDK: correos
+email = ["O365>=2.0"]
+
+# SDK: manipulación de datos
+data = [
+    "pandas>=2.0",
+    "openpyxl>=3.1",
+]
+
+# Configuración con Pydantic Settings (para los proyectos generados)
+config = [
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+]
+
+# Bundle "RPA completo": lo que un bot típico necesita instalar
+rpa = [
+    "pynet[templates,azure,database,sap,email,data,config]",
+]
+
+# Herramientas de desarrollo del framework
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+# Todo (incluye dev tools)
+all = ["pynet[rpa,dev]"]
+
+# ── Entry points ──
+# `pynet`       → CLI del dev (crear proyectos, sincronizar credenciales)
+# `pynet-admin` → CLI del admin (gestionar clientes y emitir tokens)
+[project.scripts]
+pynet = "pynet.cli.app:app"
+pynet-admin = "pynet.admin.app:app"
+
+# ── Empaquetado ──
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pynet*"]
+
+[tool.setuptools.package-data]
+pynet = ["templates/**/*"]
